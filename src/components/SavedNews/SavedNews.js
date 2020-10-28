@@ -1,13 +1,18 @@
 import React from 'react';
+import Header from '../Header/Header';
 import SavedNewsHeader from '../SavedNewsHeader/SavedNewsHeader';
+import NewsCardList from '../NewsCardList/NewsCardList';
 import './SavedNews.css';
 
 const SavedNews = () => {
   return (
-    <div className="">
-      <SavedNewsHeader />
-      <NewsCardList />
-    </div>
+    <>
+      <Header />
+      <main>
+        <SavedNewsHeader />
+        <NewsCardList />
+      </main>
+    </>
   );
 };
 

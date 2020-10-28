@@ -1,0 +1,30 @@
+.not-found {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.not-found__icon {
+  width: 96px;
+  height: 96px;
+  background:
+    url(../../images/not-found.svg)
+    center / cover
+    no-repeat;
+}
+
+.not-found__title {
+  margin-top: 2rem;
+  color: #1A1B22;
+  font: 26px/30px 'RobotoSlab', Arial, sans-serif;
+  font-weight: 400;
+}
+
+.not-found__info {
+  max-width: 20rem;
+  margin-top: 1rem;
+  color: #B6BCBF;
+  font: 18px/24px 'Roboto', Arial, sans-serif;
+  font-weight: 400;
+  text-align: center;
+}

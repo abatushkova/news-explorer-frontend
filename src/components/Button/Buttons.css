@@ -1,0 +1,22 @@
+.button {
+  display: block;
+  width: 100%;
+  height: 56px;
+  border-radius: 100px;
+  font: 18px/24px 'RobotoMedium', Arial, sans-serif;
+  font-weight: 500;
+  cursor: pointer;
+  transition-duration: .15s;
+  transition-timing-function: linear;
+  transition-delay: 0s;
+}
+
+.button:focus {
+  outline: none;
+}
+
+@media screen and (min-width: 1440px) {
+  .button {
+    height: 64px;
+  }
+}
