@@ -7,13 +7,12 @@ const PopupWithForm = (props) => {
     title,
     linkName,
     children,
-    isOpen,
     onClose,
     // onSubmit,
-    changePopup
+    changePopup,
   } = props;
 
-  return (isOpen ? (
+  return (
     <div className="popup popup_opened">
       <PopupContainer
         className="popup__container"
@@ -43,9 +42,7 @@ const PopupWithForm = (props) => {
         </p>
       </PopupContainer>
     </div>
-  ) : (
-    <div className="popup"></div>
-  ));
+  );
 }
 
 export default PopupWithForm;

@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+import useInputChange from '../../hooks/useInputChange';
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
 import Button from '../Button/Button';
 
@@ -6,17 +7,25 @@ const Register = (props) => {
   const {
     onLoginClick,
     onClose,
-    isRegisterOpen
   } = props;
+
+  const {
+    errors,
+    handleInputChange,
+    isFormValid,
+    resetForm
+  } = useInputChange();
+
+  const handleClose = () => {
+    onClose();
+    resetForm();
+  };
+
   // const handleSubmit = (evt) => {
   //   evt.preventDefault();
 
   //   onRegister();
   // }
-
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [userName, setUserName] = useState('');
 
   return (
     <PopupWithForm
@@ -24,8 +33,7 @@ const Register = (props) => {
       linkName="Войти"
       submitName="Зарегистрироваться"
       // onSubmit={handleSubmit}
-      isOpen={isRegisterOpen}
-      onClose={onClose}
+      onClose={handleClose}
       changePopup={onLoginClick}
     >
       <label className="popup__label">
@@ -36,10 +44,9 @@ const Register = (props) => {
           required={true}
           className="popup__input"
           placeholder="Введите почту"
-          // value={email}
-          // onChange={handleChange}
+          onChange={handleInputChange}
         />
-        <span className="popup__error">{}</span>
+        <span className="popup__error">{errors.email}</span>
       </label>
       <label className="popup__label">
         Пароль
@@ -49,31 +56,30 @@ const Register = (props) => {
           required={true}
           className="popup__input"
           placeholder="Введите пароль"
-          // value={password}
-          // onChange={handleChange}
+          onChange={handleInputChange}
         />
-        <span className="popup__error">{}</span>
+        <span className="popup__error">{errors.password}</span>
       </label>
       <label className="popup__label">
         Имя
         <input
           type="text"
+          name="userName"
           required={true}
           minLength={2}
           maxLength={30}
           className="popup__input"
           placeholder="Введите своё имя"
-          // value={userName}
-          // onChange={handleChange}
+          onChange={handleInputChange}
         />
-        <span className="popup__error">{}</span>
+        <span className="popup__error">{errors.userName}</span>
       </label>
-      <span className="popup__error popup__error_api">{}</span>
+      <span className="popup__error popup__error_type_api">{}</span>
       <Button
         type="submit"
         btnClass="popup__submit-btn"
+        disabled={!isFormValid}
         name="Зарегистрироваться"
-        disabled={true}
       />
     </PopupWithForm>
   );

@@ -54,16 +54,20 @@ const App = () => {
         </Route>
       </Switch>
       <Footer />
-      <Login
-        isLoginOpen={isLoginPopupOpen}
-        onClose={closePopups}
-        onRegisterClick={handleRegisterClick}
-      />
-      <Register
-        isRegisterOpen={isRegisterPopupOpen}
-        onClose={closePopups}
-        onLoginClick={handleLoginClick}
-      />
+      {isLoginPopupOpen && (
+        <Login
+          isLoginOpen={isLoginPopupOpen}
+          onClose={closePopups}
+          onRegisterClick={handleRegisterClick}
+        />
+      )}
+      {isRegisterPopupOpen && (
+        <Register
+          isRegisterOpen={isRegisterPopupOpen}
+          onClose={closePopups}
+          onLoginClick={handleLoginClick}
+        />
+      )}
     </div>
   );
 };

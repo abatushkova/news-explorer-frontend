@@ -1,13 +1,25 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
 import Button from '../Button/Button';
+import useInputChange from '../../hooks/useInputChange';
 
 const Login = (props) => {
   const {
-    isLoginOpen,
     onClose,
     onRegisterClick
   } = props;
+
+  const {
+    errors,
+    handleInputChange,
+    isFormValid,
+    resetForm
+  } = useInputChange();
+
+  const handleClose = () => {
+    onClose();
+    resetForm();
+  };
 
   // const handleSubmit = (evt) => {
   //   evt.preventDefault();
@@ -15,16 +27,12 @@ const Login = (props) => {
   //   onLogin();
   // }
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
   return (
     <PopupWithForm
       title="Вход"
       linkName="Зарегистрироваться"
       submitName="Войти"
-      isOpen={isLoginOpen}
-      onClose={onClose}
+      onClose={handleClose}
       // onSubmit={handleSubmit}
       changePopup={onRegisterClick}
     >
@@ -36,10 +44,9 @@ const Login = (props) => {
           required={true}
           className="popup__input"
           placeholder="Введите почту"
-          // value={email}
-          // onChange={handleChange}
+          onChange={handleInputChange}
         />
-        <span className="popup__error">Неправильный формат email</span>
+        <span className="popup__error">{errors.email}</span>
       </label>
       <label className="popup__label">
         Пароль
@@ -49,16 +56,15 @@ const Login = (props) => {
           required={true}
           className="popup__input"
           placeholder="Введите пароль"
-          // value={password}
-          // onChange={handleChange}
+          onChange={handleInputChange}
         />
-        <span className="popup__error"></span>
+        <span className="popup__error">{errors.password}</span>
       </label>
-      <span className="popup__error popup__error_type_api"></span>
+      <span className="popup__error popup__error_type_api">{}</span>
       <Button
         type="submit"
         btnClass="popup__submit-btn"
-        disabled={true}
+        disabled={!isFormValid}
         name="Войти"
       />
     </PopupWithForm>

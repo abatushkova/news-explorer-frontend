@@ -113,6 +113,7 @@
 }
 
 .popup__error {
+  display: block;
   min-height: 15px;
   margin-top: .1875rem;
   color: #FF0000;
@@ -127,15 +128,16 @@
   will-change: opacity;
 }
 
-.popup__error_visible {
+.popup__input:invalid + .popup__error {
   opacity: 1;
   visibility: visible;
 }
 
 .popup__error_type_api {
-  display: block;
   margin: 0 0 .5rem;
   text-align: center;
+  opacity: 1;
+  visibility: visible;
 }
 
 .popup__submit-btn {
