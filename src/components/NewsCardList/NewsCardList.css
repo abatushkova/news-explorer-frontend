@@ -36,11 +36,11 @@
 
 .news-list__load-btn:focus,
 .news-list__load-btn:hover {
-  opacity: .9;
+  opacity: .8;
 }
 
 .news-list__load-btn:active {
-  opacity: .7;
+  opacity: .6;
 }
 
 @media screen and (min-width: 768px) {

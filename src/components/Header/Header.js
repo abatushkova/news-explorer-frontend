@@ -4,21 +4,16 @@ import NavBar from '../NavBar/NavBar';
 import './Header.css';
 
 const Header = (props) => {
-  const { mode } = props;
+  const { mode, onLoginClick } = props;
 
   return (
     <header className={`header header_color_${mode}`}>
       <div className="header__section page__section">
         <Link to="/" className="header__logo">NewsExplorer</Link>
-        <input
-          type="checkbox"
-          id="burger-btn"
-          className="header__burger-checkbox"
+        <NavBar
+          mode={mode}
+          onLoginClick={onLoginClick}
         />
-        <label className="header__burger-icon" htmlFor="burger-btn">
-          <span className={`header__burger header__burger_bg_${mode}`}></span>
-        </label>
-        <NavBar mode={mode} />
       </div>
     </header>
   );

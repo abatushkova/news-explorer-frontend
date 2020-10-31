@@ -116,7 +116,7 @@
   }
 
   .search__input {
-    padding-right: 10.25rem;
+    padding: 0 10.25rem 0 1.5rem;
   }
 
   .search__submit-btn {

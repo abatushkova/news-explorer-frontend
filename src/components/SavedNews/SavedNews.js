@@ -4,8 +4,8 @@ import SavedNewsHeader from '../SavedNewsHeader/SavedNewsHeader';
 import NewsCardList from '../NewsCardList/NewsCardList';
 import './SavedNews.css';
 
-const SavedNews = () => {
-  const mode = JSON.parse(localStorage.getItem('mode'));
+const SavedNews = (props) => {
+  const { mode } = props;
 
   return (
     <>
