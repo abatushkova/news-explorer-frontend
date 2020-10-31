@@ -17,8 +17,8 @@ const Login = (props) => {
   } = useInputChange();
 
   const handleClose = () => {
-    onClose();
     resetForm();
+    onClose();
   };
 
   // const handleSubmit = (evt) => {
