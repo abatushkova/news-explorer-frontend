@@ -6,10 +6,14 @@
 .news-list__container {
   display: -ms-grid;
   display: grid;
+  -ms-grid-columns: auto;
   grid-template-columns: auto;
+  -ms-grid-rows: 1fr;
   grid-template-rows: 1fr;
   gap: .625rem;
-  justify-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   width: 100%;
 }
 
@@ -25,6 +29,8 @@
   border-radius: 80px;
   background-color: #fff;
   color: #1A1B22;
+  -webkit-transition-property: opacity;
+  -o-transition-property: opacity;
   transition-property: opacity;
 }
 
@@ -43,6 +49,7 @@
   }
 
   .news-list__container {
+    -ms-grid-columns: 1fr .5rem 1fr .5rem 1fr;
     grid-template-columns: repeat(3, 1fr);
     gap: .5rem;
   }

@@ -6,26 +6,35 @@ import Button from '../Button/Button';
 import temporaryData from '../../utils/temporaryData.json';
 import './NewsCardList.css';
 
-const NewsCardList = () => {
+const NewsCardList = (props) => {
+  const { isSavedNews } = props;
+
   return (
     <section className="news-list">
       <div className="page__section">
-        <h2 className="news-list__title">Результаты поиска</h2>
+        {!isSavedNews && (
+          <h2 className="news-list__title">Результаты поиска</h2>
+        )}
         <div className="news-list__container">
           {temporaryData.map((news) => (
             <NewsCard
               key={news.id}
               data={news}
+              isSavedNews={isSavedNews}
             />
           ))}
         </div>
-        {/* <Preloader /> */}
-        {/* <NotFound /> */}
-        <Button
-          type="button"
-          btnClass="news-list__load-btn"
-          name="Показать еще"
-        />
+        {!isSavedNews && (
+          <>
+            {/* <Preloader /> */}
+            {/* <NotFound /> */}
+            <Button
+              type="button"
+              btnClass="news-list__load-btn"
+              name="Показать еще"
+            />
+          </>
+        )}
       </div>
     </section>
   );

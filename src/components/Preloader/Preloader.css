@@ -6,7 +6,8 @@
   border: 1px solid #D1D2D6;
   border-bottom-color: #1A1B22;
   border-radius: 50%;
-  animation: spin .75s infinite linear;
+  -webkit-animation: spin .75s infinite linear;
+          animation: spin .75s infinite linear;
 }
 
 .preloader__title {
@@ -17,8 +18,16 @@
   text-align: center;
 }
 
+@-webkit-keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
 @keyframes spin {
   100% {
-    transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
   }
 }

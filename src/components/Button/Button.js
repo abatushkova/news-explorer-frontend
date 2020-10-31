@@ -1,13 +1,14 @@
 import React from 'react';
-import './Buttons.css';
+import './Button.css';
 
-function Button({ ...props }) {
+const Button = ({ ...props }) => {
   const {
     type,
     disabled,
     btnClass,
     name,
     clickHandler,
+    children,
   } = props;
 
   return (
@@ -17,7 +18,7 @@ function Button({ ...props }) {
       className={`button ${btnClass}`}
       {...(type !== 'submit' && { onClick: clickHandler})}
     >
-      {name}
+      {children ? children : name}
     </button>
   );
 }

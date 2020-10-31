@@ -6,8 +6,14 @@
   font: 18px/24px 'RobotoMedium', Arial, sans-serif;
   font-weight: 500;
   cursor: pointer;
+  -webkit-transition-duration: .15s;
+  -o-transition-duration: .15s;
   transition-duration: .15s;
+  -webkit-transition-timing-function: linear;
+  -o-transition-timing-function: linear;
   transition-timing-function: linear;
+  -webkit-transition-delay: 0s;
+  -o-transition-delay: 0s;
   transition-delay: 0s;
 }
 

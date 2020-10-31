@@ -5,12 +5,16 @@ import NewsCardList from '../NewsCardList/NewsCardList';
 import './SavedNews.css';
 
 const SavedNews = () => {
+  const mode = JSON.parse(localStorage.getItem('mode'));
+
   return (
     <>
-      <Header />
+      <Header mode={mode.BLACK} />
       <main>
         <SavedNewsHeader />
-        <NewsCardList />
+        <NewsCardList
+          isSavedNews={true}
+        />
       </main>
     </>
   );
