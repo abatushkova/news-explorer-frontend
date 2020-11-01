@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import { ReactComponent as CloseIcon } from '../../images/close.svg';
 import './PopupWithForm.css';
 
@@ -14,17 +14,7 @@ const PopupWithForm = (props) => {
 
   const popupContainer = useRef(null);
 
-  useEffect(() => {
-    document.addEventListener('click', handleClick, false);
-    document.addEventListener('keydown', handleEsc, false);
-
-    return () => {
-      document.removeEventListener('click', handleClick, false);
-      document.removeEventListener('keydown', handleEsc, false);
-    };
-  }, []);
-
-  const handleClick = (evt) => {
+  const handleOverlayClick = (evt) => {
     if (
       popupContainer.current
       && !popupContainer.current.contains(evt.target)
@@ -38,6 +28,15 @@ const PopupWithForm = (props) => {
       closePopup();
     }
   };
+  useEffect(() => {
+    document.addEventListener('click', handleOverlayClick, false);
+    document.addEventListener('keydown', handleEsc, false);
+
+    return () => {
+      document.removeEventListener('click', handleOverlayClick, false);
+      document.removeEventListener('keydown', handleEsc, false);
+    };
+  }, []);
 
   return (
     <div className="popup popup_opened">

@@ -11,6 +11,7 @@ const SearchForm = () => {
         <form className="search__form">
           <input
             type="text"
+            required={true}
             placeholder="Введите тему новости"
             className="search__input"
           />
