@@ -1,5 +1,6 @@
 import React from 'react';
 import PopupContainer from '../PopupContainer/PopupContainer';
+import { ReactComponent as CloseIcon } from '../../images/close.svg';
 import './PopupWithForm.css';
 
 const PopupWithForm = (props) => {
@@ -23,7 +24,9 @@ const PopupWithForm = (props) => {
           className="popup__close-btn"
           title="Закрыть"
           onClick={onClose}
-        ></button>
+        >
+          <CloseIcon />
+        </button>
         <h2 className="popup__title">{title}</h2>
         <form
           className="popup__form"

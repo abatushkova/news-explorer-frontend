@@ -197,14 +197,10 @@
 
 .popup__close-btn {
   position: absolute;
-  top: -44px;
+  top: 4px;
   right: 8px;
-  width: 32px;
-  height: 32px;
-  background:
-    url(../../images/close.svg)
-    center / cover
-    no-repeat;
+  width: 40px;
+  height: 40px;
   -webkit-transition: opacity .15s linear 0s;
   -o-transition: opacity .15s linear 0s;
   transition: opacity .15s linear 0s;
@@ -219,6 +215,10 @@
 
 .popup__close-btn:active {
   opacity: .4;
+}
+
+.popup__close-btn path {
+  fill: #1A1B22;
 }
 
 @media screen and (min-width: 768px) {
@@ -239,8 +239,6 @@
   .popup__close-btn {
     top: -46px;
     right: -46px;
-    width: 40px;
-    height: 40px;
   }
   
   .popup__close-btn path {
