@@ -1,0 +1,97 @@
+.footer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+}
+
+.footer__nav {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.footer__link {
+  margin-bottom: 1.5rem;
+  color: #1A1B22;
+  font: 18px/24px 'Roboto', Arial, sans-serif;
+  text-decoration: none;
+}
+
+.footer__social {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  font-size: 0;
+}
+
+.footer__social-link {
+  margin-left: 1.5rem;
+  padding: 0.125rem;
+}
+
+.footer__copyright {
+  -ms-flex-preferred-size: 100%;
+      flex-basis: 100%;
+  color: #B6BCBF;
+  font: 16px/22px 'Roboto', Arial, sans-serif;
+  font-weight: 400;
+}
+
+@media screen and (min-width: 768px) {
+  .footer {
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    padding-top: 1.375rem;
+    padding-bottom: 1.375rem;
+  }
+
+  .footer__nav {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+  }
+
+  .footer__link {
+    margin: 0 0 0 1rem;
+  }
+
+  .footer__copyright {
+    -ms-flex-preferred-size: auto;
+        flex-basis: auto;
+    -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+            flex-grow: 1;
+    -webkit-box-ordinal-group: 0;
+        -ms-flex-order: -1;
+            order: -1;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .footer {
+    padding-top: 1.875rem;
+    padding-bottom: 1.75ren;
+  }
+
+  .footer__link {
+    margin: 0 2.125rem 0 0;
+  }
+}
