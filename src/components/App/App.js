@@ -6,10 +6,12 @@ import Login from '../Login/Login';
 import Register from '../Register/Register';
 import SavedNews from '../SavedNews/SavedNews';
 import './App.css';
+import Tooltip from '../Tooltip/Tooltip';
 
 const App = () => {
   const [isLoginPopupOpen, setLoginOpen] = useState(false);
   const [isRegisterPopupOpen, setRegisterOpen] = useState(false);
+  const [isTooltipPopupOpen, setTooltipOpen] = useState(false);
 
   const [mode, setMode] = useState({
     BLACK: 'black',
@@ -36,6 +38,7 @@ const App = () => {
   const closePopups = () => {
     setLoginOpen(false);
     setRegisterOpen(false);
+    setTooltipOpen(false);
   };
 
   return (
@@ -64,6 +67,13 @@ const App = () => {
       {isRegisterPopupOpen && (
         <Register
           isRegisterOpen={isRegisterPopupOpen}
+          onClose={closePopups}
+          onLoginClick={handleLoginClick}
+        />
+      )}
+      {isTooltipPopupOpen && (
+        <Tooltip
+          isTooltipOpen={isTooltipPopupOpen}
           onClose={closePopups}
           onLoginClick={handleLoginClick}
         />

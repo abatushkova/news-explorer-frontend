@@ -57,15 +57,17 @@ const PopupWithForm = (props) => {
         >
           {children}
         </form>
-        <p className="popup__switch">
-          или <button
-            type="button"
-            className="popup__link"
-            onClick={changePopup}
-          >
-            {linkName}
-          </button>
-        </p>
+        {linkName && (
+          <p className="popup__switch">
+            или <button
+              type="button"
+              className="popup__link"
+              onClick={changePopup}
+            >
+              {linkName}
+            </button>
+          </p>
+        )}
       </div>
     </div>
   );
