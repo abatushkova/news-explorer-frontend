@@ -33,7 +33,7 @@ const Register = (props) => {
       linkName="Войти"
       submitName="Зарегистрироваться"
       // onSubmit={handleSubmit}
-      onClose={handleClose}
+      closePopup={handleClose}
       changePopup={onLoginClick}
     >
       <label className="popup__label">

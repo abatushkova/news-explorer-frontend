@@ -33,7 +33,7 @@ const NewsCard = (props) => {
             type="button"
             className="news__label"
           >
-            <BookmarkIcon className="news__icon news__bookmark news__bookmark_saved" />
+            <BookmarkIcon className="news__icon news__bookmark-saved" />
           </button> */}
           <button
             type="button"

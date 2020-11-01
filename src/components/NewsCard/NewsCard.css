@@ -65,23 +65,23 @@
   cursor: pointer;
 }
 
-.news__delete:focus path,
-.news__delete:hover path {
+.news__label_active:focus .news__delete path,
+.news__label_active:hover .news__delete path {
   fill: #1A1B22;
   -webkit-transition: fill .15s linear 0s;
   -o-transition: fill .15s linear 0s;
-  transition: fill .15s linear 0s
+  transition: fill .15s linear 0s;
 }
 
-.news__bookmark:not(.news__bookmark_saved):focus path,
-.news__bookmark:not(.news__bookmark_saved):hover path {
+.news__label_active:focus .news__bookmark path,
+.news__label_active:hover .news__bookmark path {
   stroke: #1A1B22;
   -webkit-transition: stroke .15s linear 0s;
   -o-transition: stroke .15s linear 0s;
-  transition: stroke .15s linear 0s
+  transition: stroke .15s linear 0s;
 }
 
-.news__bookmark_saved path {
+.news__bookmark-saved path {
   fill: #2F71E5;
   stroke: #2F71E5;
 }
@@ -136,7 +136,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  height: 26px;
+  height: 24px;
   background: -webkit-gradient(linear, left bottom, left top, from(rgba(255,255,255,1)), to(rgba(255,255,255,0)));
   background: -o-linear-gradient(bottom, rgba(255,255,255,1), rgba(255,255,255,0));
   background: linear-gradient(to top, rgba(255,255,255,1), rgba(255,255,255,0));

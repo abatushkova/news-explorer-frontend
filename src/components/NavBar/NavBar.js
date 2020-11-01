@@ -7,8 +7,7 @@ import './NavBar.css';
 const NavBar = (props) => {
   const {
     mode,
-    onLoginClick,
-    onClose
+    openLogin,
   } = props;
 
   const [burgerClass, setBurgerClass] = useState('');
@@ -27,7 +26,7 @@ const NavBar = (props) => {
   }
   
   const handleLoginClick = () => {
-    onLoginClick();
+    openLogin();
     setBurgerClass('');
   }
 
@@ -67,7 +66,6 @@ const NavBar = (props) => {
                 btnClass="menu__btn"
                 name="Авторизоваться"
                 clickHandler={handleLoginClick}
-                closeHandler={onClose}
               />
             ) : (
               <Button

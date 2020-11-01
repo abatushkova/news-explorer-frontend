@@ -12,7 +12,7 @@ const Header = (props) => {
         <Link to="/" className="header__logo">NewsExplorer</Link>
         <NavBar
           mode={mode}
-          onLoginClick={onLoginClick}
+          openLogin={onLoginClick}
         />
       </div>
     </header>

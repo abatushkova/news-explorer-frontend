@@ -32,7 +32,7 @@ const Login = (props) => {
       title="Вход"
       linkName="Зарегистрироваться"
       submitName="Войти"
-      onClose={handleClose}
+      closePopup={handleClose}
       // onSubmit={handleSubmit}
       changePopup={onRegisterClick}
     >
