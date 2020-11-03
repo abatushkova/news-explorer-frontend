@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/abatushkova/news-explorer-frontend/precache-manifest.0c8d51e5a568b0143f8d28e96d8727dd.js"
+  "/abatushkova/news-explorer-frontend/precache-manifest.e2db0419b46f9f1c11e8400d019ccc69.js"
 );
 
 self.addEventListener('message', (event) => {
