@@ -1,0 +1,32 @@
+{
+  "files": {
+    "main.css": "/news-explorer-frontend/static/css/main.1e2f064a.chunk.css",
+    "main.js": "/news-explorer-frontend/static/js/main.5f70cb87.chunk.js",
+    "main.js.map": "/news-explorer-frontend/static/js/main.5f70cb87.chunk.js.map",
+    "runtime-main.js": "/news-explorer-frontend/static/js/runtime-main.e142ac34.js",
+    "runtime-main.js.map": "/news-explorer-frontend/static/js/runtime-main.e142ac34.js.map",
+    "static/js/2.b40f68f8.chunk.js": "/news-explorer-frontend/static/js/2.b40f68f8.chunk.js",
+    "static/js/2.b40f68f8.chunk.js.map": "/news-explorer-frontend/static/js/2.b40f68f8.chunk.js.map",
+    "index.html": "/news-explorer-frontend/index.html",
+    "precache-manifest.ad31bb8afbf681df01690e2b9f3bdb7c.js": "/news-explorer-frontend/precache-manifest.ad31bb8afbf681df01690e2b9f3bdb7c.js",
+    "service-worker.js": "/news-explorer-frontend/service-worker.js",
+    "static/css/main.1e2f064a.chunk.css.map": "/news-explorer-frontend/static/css/main.1e2f064a.chunk.css.map",
+    "static/js/2.b40f68f8.chunk.js.LICENSE.txt": "/news-explorer-frontend/static/js/2.b40f68f8.chunk.js.LICENSE.txt",
+    "static/media/author.jpg": "/news-explorer-frontend/static/media/author.93e83d9b.jpg",
+    "static/media/SearchForm.css": "/news-explorer-frontend/static/media/backdrop.b9a9d60a.jpg",
+    "static/media/bookmark.d1446e56.svg": "/news-explorer-frontend/static/media/bookmark.d1446e56.svg",
+    "static/media/close.85491229.svg": "/news-explorer-frontend/static/media/close.85491229.svg",
+    "static/media/facebook.4521f6ae.svg": "/news-explorer-frontend/static/media/facebook.4521f6ae.svg",
+    "static/media/github.9d3f5a7c.svg": "/news-explorer-frontend/static/media/github.9d3f5a7c.svg",
+    "static/media/index.css": "/news-explorer-frontend/static/media/sourcesanspro-regular.49d8d828.woff",
+    "static/media/logout.60f7b547.svg": "/news-explorer-frontend/static/media/logout.60f7b547.svg",
+    "static/media/NotFound.css": "/news-explorer-frontend/static/media/not-found.0d979a34.svg",
+    "static/media/trash.f137ec90.svg": "/news-explorer-frontend/static/media/trash.f137ec90.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.e142ac34.js",
+    "static/js/2.b40f68f8.chunk.js",
+    "static/css/main.1e2f064a.chunk.css",
+    "static/js/main.5f70cb87.chunk.js"
+  ]
+}
