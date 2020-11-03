@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/abatushkova/news-explorer-frontend/static/css/main.72d5edd1.chunk.css",
-    "main.js": "/abatushkova/news-explorer-frontend/static/js/main.f95a360b.chunk.js",
-    "main.js.map": "/abatushkova/news-explorer-frontend/static/js/main.f95a360b.chunk.js.map",
+    "main.js": "/abatushkova/news-explorer-frontend/static/js/main.4fd2b756.chunk.js",
+    "main.js.map": "/abatushkova/news-explorer-frontend/static/js/main.4fd2b756.chunk.js.map",
     "runtime-main.js": "/abatushkova/news-explorer-frontend/static/js/runtime-main.0bdfc4c6.js",
     "runtime-main.js.map": "/abatushkova/news-explorer-frontend/static/js/runtime-main.0bdfc4c6.js.map",
     "static/js/2.382b246f.chunk.js": "/abatushkova/news-explorer-frontend/static/js/2.382b246f.chunk.js",
     "static/js/2.382b246f.chunk.js.map": "/abatushkova/news-explorer-frontend/static/js/2.382b246f.chunk.js.map",
     "index.html": "/abatushkova/news-explorer-frontend/index.html",
-    "precache-manifest.e2db0419b46f9f1c11e8400d019ccc69.js": "/abatushkova/news-explorer-frontend/precache-manifest.e2db0419b46f9f1c11e8400d019ccc69.js",
+    "precache-manifest.af9bb5731b4bbb49229d161cdc663b9f.js": "/abatushkova/news-explorer-frontend/precache-manifest.af9bb5731b4bbb49229d161cdc663b9f.js",
     "service-worker.js": "/abatushkova/news-explorer-frontend/service-worker.js",
     "static/css/main.72d5edd1.chunk.css.map": "/abatushkova/news-explorer-frontend/static/css/main.72d5edd1.chunk.css.map",
     "static/js/2.382b246f.chunk.js.LICENSE.txt": "/abatushkova/news-explorer-frontend/static/js/2.382b246f.chunk.js.LICENSE.txt",
@@ -27,6 +27,6 @@
     "static/js/runtime-main.0bdfc4c6.js",
     "static/js/2.382b246f.chunk.js",
     "static/css/main.72d5edd1.chunk.css",
-    "static/js/main.f95a360b.chunk.js"
+    "static/js/main.4fd2b756.chunk.js"
   ]
 }
