@@ -8,6 +8,9 @@ const NavBar = (props) => {
   const {
     mode,
     openLogin,
+    loggedIn,
+    signOut,
+    user
   } = props;
 
   const [burgerClass, setBurgerClass] = useState('');
@@ -16,6 +19,7 @@ const NavBar = (props) => {
   const listClass = `menu__list menu__list_bg_${mode}`;
   const linkClass = `menu__link menu__link_color_${mode}`;
   const iconClass = `menu__logout-icon menu__logout-icon_color_${mode}`;
+  const btnClass = `menu__btn menu__btn_border_${mode}`
   
   const toggleBurger = () => {
     if (burgerClass === '') {
@@ -48,36 +52,38 @@ const NavBar = (props) => {
               Главная
             </NavLink>
           </li>
-          {mode === 'black' && (
+          {loggedIn ? (
+            <>
+              <li className="menu__item">
+                <NavLink
+                  exact to="/saved-news"
+                  className={linkClass}
+                  activeClassName="menu__link_active"
+                >
+                  Сохранённые статьи
+                </NavLink>
+              </li>
+              <li className="menu__item">
+                <Button
+                  type="button"
+                  btnClass={btnClass}
+                  clickHandler={signOut}
+                >
+                  {user.name}
+                  <LogoutIcon className={iconClass} />
+                </Button>
+              </li>
+            </>
+          ) : (
             <li className="menu__item">
-              <NavLink
-                exact to="/saved-news"
-                className={linkClass}
-                activeClassName="menu__link_active"
-              >
-                Сохранённые статьи
-              </NavLink>
-            </li>
-          )}
-          <li className="menu__item">
-            {mode === 'white' ? (
               <Button
                 type="button"
-                btnClass="menu__btn"
+                btnClass={btnClass}
                 name="Авторизоваться"
                 clickHandler={handleLoginClick}
               />
-            ) : (
-              <Button
-                type="button"
-                btnClass="menu__btn"
-                // clickHandler={signOut}
-              >
-                Грета
-                <LogoutIcon className={iconClass} />
-              </Button>
-            )}
-          </li>
+            </li>
+          )}
         </ul>
       </nav>
     </>

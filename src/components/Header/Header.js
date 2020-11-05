@@ -1,10 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import NavBar from '../NavBar/NavBar';
 import './Header.css';
 
 const Header = (props) => {
-  const { mode, onLoginClick } = props;
+  const currentUser = useContext(CurrentUserContext);
+  const {
+    mode,
+    onLoginClick,
+    loggedIn,
+    onSignOut,
+  } = props;
 
   return (
     <header className={`header header_color_${mode}`}>
@@ -13,6 +20,9 @@ const Header = (props) => {
         <NavBar
           mode={mode}
           openLogin={onLoginClick}
+          loggedIn={loggedIn}
+          signOut={onSignOut}
+          user={currentUser}
         />
       </div>
     </header>

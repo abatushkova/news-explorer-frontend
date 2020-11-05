@@ -24,6 +24,7 @@ const useInputChange = () => {
   );
 
   return {
+    values,
     errors,
     handleInputChange,
     isFormValid,

@@ -8,7 +8,7 @@ const PopupWithForm = (props) => {
     linkName,
     children,
     closePopup,
-    // onSubmit,
+    onSubmit,
     changePopup,
   } = props;
 
@@ -28,6 +28,7 @@ const PopupWithForm = (props) => {
       closePopup();
     }
   };
+
   useEffect(() => {
     document.addEventListener('click', handleOverlayClick, false);
     document.addEventListener('keydown', handleEsc, false);
@@ -36,7 +37,7 @@ const PopupWithForm = (props) => {
       document.removeEventListener('click', handleOverlayClick, false);
       document.removeEventListener('keydown', handleEsc, false);
     };
-  }, []);
+  }, []); // fix warning
 
   return (
     <div className="popup popup_opened">
@@ -52,7 +53,7 @@ const PopupWithForm = (props) => {
         <h2 className="popup__title">{title}</h2>
         <form
           className="popup__form"
-          // onSubmit={onSubmit}
+          onSubmit={onSubmit}
         >
           {children}
         </form>

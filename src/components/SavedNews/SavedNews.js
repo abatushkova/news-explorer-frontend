@@ -1,22 +1,20 @@
 import React from 'react';
-import Header from '../Header/Header';
+import { useLocation } from 'react-router-dom';
 import SavedNewsHeader from '../SavedNewsHeader/SavedNewsHeader';
 import NewsCardList from '../NewsCardList/NewsCardList';
 import './SavedNews.css';
 
-const SavedNews = (props) => {
-  const { mode } = props;
+const SavedNews = () => {
+  const location = useLocation();
+  const savedNewsPage = location.pathname === '/saved-news';
 
   return (
-    <>
-      <Header mode={mode.BLACK} />
-      <main>
-        <SavedNewsHeader />
-        <NewsCardList
-          isSavedNews={true}
-        />
-      </main>
-    </>
+    <main>
+      <SavedNewsHeader />
+      <NewsCardList
+        isSavedNews={savedNewsPage}
+      />
+    </main>
   );
 };
 

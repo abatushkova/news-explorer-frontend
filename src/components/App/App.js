@@ -1,17 +1,27 @@
 import React, { useEffect, useState } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, useHistory, useLocation } from 'react-router-dom';
 import Footer from '../Footer/Footer';
 import Main from '../Main/Main';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
 import SavedNews from '../SavedNews/SavedNews';
-import './App.css';
 import Tooltip from '../Tooltip/Tooltip';
+import Header from '../Header/Header';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import MainApi from '../../utils/MainApi';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import * as auth from '../../utils/auth';
+import './App.css';
 
 const App = () => {
-  const [isLoginPopupOpen, setLoginOpen] = useState(false);
-  const [isRegisterPopupOpen, setRegisterOpen] = useState(false);
-  const [isTooltipPopupOpen, setTooltipOpen] = useState(false);
+  const [currentUser, setCurrentUser] = useState(null);
+  const [isLoginPopupOpen, setLoginPopupOpen] = useState(false);
+  const [isRegisterPopupOpen, setRegisterPopupOpen] = useState(false);
+  const [isTooltipPopupOpen, setTooltipPopupOpen] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [apiError, setApiError] = useState('');
+  const history = useHistory();
+  const location = useLocation();
 
   const [mode, setMode] = useState({
     BLACK: 'black',
@@ -26,54 +36,138 @@ const App = () => {
     }
   }, [mode]);
 
-  const handleLoginClick = () => {
-    setLoginOpen(true);
-    setRegisterOpen(false);
+  useEffect(() => {
+    if (location.pathname === '/saved-news') {
+      setLoginPopupOpen(true);
+    }
+
+    if (!localStorage.getItem('token')) {
+      return;
+    }
+
+    Promise.all([
+      localStorage.getItem('token'),
+      MainApi.getUser()
+    ])
+    .then(([token, user]) => {
+      if (token) {
+        auth.checkToken(token)
+          .then((res) => {
+            if (res) {
+              setLoggedIn(true);
+            }
+          });
+      }
+
+      setCurrentUser(user);
+    })
+    .catch((err) => console.error(err));
+  }, []);
+
+  const onLogin = ({ email, password }) => {
+    return auth.login({ email, password })
+      .then((res) => {
+        if (res && res.token) {
+          localStorage.setItem('token', res.token);
+          
+          auth.checkToken(res.token)
+          .then((res) => {
+            if (res) {
+              setCurrentUser(res);
+              setLoggedIn(true);
+              setLoginPopupOpen(false);
+          }});
+        }
+
+        return Promise.reject(res);
+      })
+      .catch((err) => setApiError(err.message));
   };
+
+  const onRegister = ({ email, password, name }) => {
+    return auth.register({ email, password, name })
+      .then((res) => {
+        if (res && res._id) {
+          setCurrentUser(res);
+          setRegisterPopupOpen(false);
+          setTooltipPopupOpen(true);
+        }
+
+        return Promise.reject(res);
+      })
+      .catch((err) => setApiError(err.message));
+  };
+
+  const onSignOut = () => {
+    localStorage.removeItem('token');
+    setLoggedIn(false);
+    history.push('/');
+  }
+
+  const handleLoginClick = () => {
+    setLoginPopupOpen(true);
+    setRegisterPopupOpen(false);
+    setTooltipPopupOpen(false);
+  };
+
   const handleRegisterClick = () => {
-    setRegisterOpen(true);
-    setLoginOpen(false);
+    setRegisterPopupOpen(true);
+    setLoginPopupOpen(false);
   };
 
   const closePopups = () => {
-    setLoginOpen(false);
-    setRegisterOpen(false);
-    setTooltipOpen(false);
+    setLoginPopupOpen(false);
+    setRegisterPopupOpen(false);
+    setTooltipPopupOpen(false);
+    setApiError('');
   };
 
   return (
     <div className="page">
       <Switch>
         <Route exact path="/">
-          <Main
-            onLoginClick={handleLoginClick}
-            mode={mode}
-          />
+          <CurrentUserContext.Provider value={currentUser}>
+            <Header
+              mode={mode.WHITE}
+              onLoginClick={handleLoginClick}
+              loggedIn={loggedIn}
+              onSignOut={onSignOut}
+            />
+            <Main />
+          </CurrentUserContext.Provider>
         </Route>
-        <Route path="/saved-news">
-          <SavedNews
-            mode={mode}
-          />
-        </Route>
+        <ProtectedRoute
+          path="/saved-news"
+        >
+          <CurrentUserContext.Provider value={currentUser}>
+            <Header
+              mode={mode.BLACK}
+              loggedIn={loggedIn}
+              onSignOut={onSignOut}
+            />
+            <SavedNews />
+          </CurrentUserContext.Provider>
+        </ProtectedRoute>
       </Switch>
       <Footer />
       {isLoginPopupOpen && (
         <Login
-          isLoginOpen={isLoginPopupOpen}
+          onLogin={onLogin}
           onClose={closePopups}
           onRegisterClick={handleRegisterClick}
+          apiError={apiError}
         />
       )}
       {isRegisterPopupOpen && (
         <Register
-          isRegisterOpen={isRegisterPopupOpen}
+          onRegister={onRegister}
           onClose={closePopups}
           onLoginClick={handleLoginClick}
+          apiError={apiError}
         />
       )}
       {isTooltipPopupOpen && (
         <Tooltip
-          isTooltipOpen={isTooltipPopupOpen}
           onClose={closePopups}
           onLoginClick={handleLoginClick}
         />

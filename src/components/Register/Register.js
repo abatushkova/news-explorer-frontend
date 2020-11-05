@@ -7,9 +7,12 @@ const Register = (props) => {
   const {
     onLoginClick,
     onClose,
+    apiError,
+    onRegister
   } = props;
 
   const {
+    values,
     errors,
     handleInputChange,
     isFormValid,
@@ -21,18 +24,21 @@ const Register = (props) => {
     onClose();
   };
 
-  // const handleSubmit = (evt) => {
-  //   evt.preventDefault();
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
 
-  //   onRegister();
-  // }
+    onRegister({
+      email: values.email,
+      password: values.password,
+      name: values.userName
+    });
+  }
 
   return (
     <PopupWithForm
       title="Регистрация"
       linkName="Войти"
-      submitName="Зарегистрироваться"
-      // onSubmit={handleSubmit}
+      onSubmit={handleSubmit}
       closePopup={handleClose}
       changePopup={onLoginClick}
     >
@@ -74,7 +80,7 @@ const Register = (props) => {
         />
         <span className="popup__error">{errors.userName}</span>
       </label>
-      <span className="popup__error popup__error_type_api">{}</span>
+      <span className="popup__error popup__error_type_api">{apiError}</span>
       <Button
         type="submit"
         btnClass="popup__submit-btn"
