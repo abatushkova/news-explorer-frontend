@@ -21,6 +21,6 @@ const Button = ({ ...props }) => {
       {children ? children : name}
     </button>
   );
-}
+};
 
 export default Button;

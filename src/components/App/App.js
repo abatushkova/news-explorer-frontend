@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Route, Switch, useHistory, useLocation } from 'react-router-dom';
+import { Route, Switch, useHistory } from 'react-router-dom';
 import Footer from '../Footer/Footer';
 import Main from '../Main/Main';
 import Login from '../Login/Login';
@@ -9,8 +9,8 @@ import Tooltip from '../Tooltip/Tooltip';
 import Header from '../Header/Header';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import MainApi from '../../utils/MainApi';
+import NavBar from '../NavBar/NavBar';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
-import * as auth from '../../utils/auth';
 import './App.css';
 
 const App = () => {
@@ -20,13 +20,34 @@ const App = () => {
   const [isTooltipPopupOpen, setTooltipPopupOpen] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   const [apiError, setApiError] = useState('');
+  const [savedArticleList, setSavedArticleList] = useState([]);
   const history = useHistory();
-  const location = useLocation();
 
   const [mode, setMode] = useState({
     BLACK: 'black',
     WHITE: 'white'
   });
+
+  useEffect(() => {
+    if (!localStorage.getItem('token')) return;
+
+    Promise.all([
+      localStorage.getItem('token'),
+      MainApi.getUser(localStorage.getItem('token')),
+    ])
+    .then(([token, user]) => {
+      if (token) {
+        MainApi.checkToken(token)
+          .then((res) => {
+            if (res) {
+              setCurrentUser(user);
+              setLoggedIn(true);
+            }
+          });
+      }
+    })
+    .catch((err) => console.error(err));
+  }, []);
 
   useEffect(() => {
     localStorage.setItem('mode', JSON.stringify(mode));
@@ -37,46 +58,25 @@ const App = () => {
   }, [mode]);
 
   useEffect(() => {
-    if (location.pathname === '/saved-news') {
+    if (history.action === 'REPLACE') {
       setLoginPopupOpen(true);
     }
-
-    if (!localStorage.getItem('token')) {
-      return;
-    }
-
-    Promise.all([
-      localStorage.getItem('token'),
-      MainApi.getUser()
-    ])
-    .then(([token, user]) => {
-      if (token) {
-        auth.checkToken(token)
-          .then((res) => {
-            if (res) {
-              setLoggedIn(true);
-            }
-          });
-      }
-
-      setCurrentUser(user);
-    })
-    .catch((err) => console.error(err));
-  }, []);
+  }, [history]);
 
   const onLogin = ({ email, password }) => {
-    return auth.login({ email, password })
+    return MainApi.login({ email, password })
       .then((res) => {
         if (res && res.token) {
           localStorage.setItem('token', res.token);
-          
-          auth.checkToken(res.token)
-          .then((res) => {
-            if (res) {
-              setCurrentUser(res);
-              setLoggedIn(true);
-              setLoginPopupOpen(false);
-          }});
+
+          MainApi.checkToken(res.token)
+            .then((res) => {
+              if (res) {
+                setCurrentUser(res);
+                setLoggedIn(true);
+                setLoginPopupOpen(false);
+              }
+            });
         }
 
         return Promise.reject(res);
@@ -85,7 +85,7 @@ const App = () => {
   };
 
   const onRegister = ({ email, password, name }) => {
-    return auth.register({ email, password, name })
+    return MainApi.register({ email, password, name })
       .then((res) => {
         if (res && res._id) {
           setCurrentUser(res);
@@ -102,7 +102,7 @@ const App = () => {
     localStorage.removeItem('token');
     setLoggedIn(false);
     history.push('/');
-  }
+  };
 
   const handleLoginClick = () => {
     setLoginPopupOpen(true);
@@ -122,30 +122,73 @@ const App = () => {
     setApiError('');
   };
 
+  const handleSaveArticle = (article) => {
+    return MainApi.createArticle(article, localStorage.getItem('token'))
+      .then((newArticle) => {
+        const newArticles = savedArticleList.map((a) => (
+          a._id === article._id ? newArticle : a
+        ));
+
+        setSavedArticleList(newArticles);
+        return newArticle;
+      })
+      .catch((err) => console.error(err));
+  };
+
+  const handleDeleteArticle = (articleID) => {
+    return MainApi.deleteArticle(articleID, localStorage.getItem('token'))
+      .then((newArticle) => {
+        const newArticles = savedArticleList.filter((a) => (
+          a._id === articleID ? null : newArticle
+        ));
+
+        setSavedArticleList(newArticles);
+        return newArticle;
+      })
+      .catch((err) => console.error(err));
+  };
+
   return (
     <div className="page">
       <Switch>
         <Route exact path="/">
           <CurrentUserContext.Provider value={currentUser}>
-            <Header
-              mode={mode.WHITE}
-              onLoginClick={handleLoginClick}
+            <Header mode={mode.WHITE}>
+              <NavBar
+                mode={mode.WHITE}
+                openLogin={handleLoginClick}
+                loggedIn={loggedIn}
+                signOut={onSignOut}
+              />
+            </Header>
+            <Main
               loggedIn={loggedIn}
-              onSignOut={onSignOut}
+              onSaveClick={handleSaveArticle}
+              onDeleteClick={handleDeleteArticle}
+              onSaveClickNotLoggedIn={handleLoginClick}
             />
-            <Main />
           </CurrentUserContext.Provider>
         </Route>
         <ProtectedRoute
           path="/saved-news"
         >
           <CurrentUserContext.Provider value={currentUser}>
-            <Header
-              mode={mode.BLACK}
-              loggedIn={loggedIn}
-              onSignOut={onSignOut}
-            />
-            <SavedNews />
+            {currentUser && (
+              <>
+                <Header mode={mode.BLACK}>
+                  <NavBar
+                    mode={mode.BLACK}
+                    openLogin={handleLoginClick}
+                    loggedIn={loggedIn}
+                    signOut={onSignOut}
+                  />
+                </Header>
+                <SavedNews
+                  onDeleteClick={handleDeleteArticle}
+                  savedArticleList={savedArticleList}
+                />
+              </>
+            )}
           </CurrentUserContext.Provider>
         </ProtectedRoute>
       </Switch>

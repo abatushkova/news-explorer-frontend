@@ -1,4 +1,4 @@
-.not-found {
+.newsapi-error {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -12,24 +12,13 @@
   padding: 2rem 0;
 }
 
-.not-found__icon {
-  width: 96px;
-  height: 96px;
-  background:
-    url(../../images/not-found.svg)
-    center / cover
-    no-repeat;
-}
-
-.not-found__title {
-  margin-top: 2rem;
+.newsapi-error__title {
   color: #1A1B22;
   font: 26px/30px 'RobotoSlab', Arial, sans-serif;
   font-weight: 400;
 }
 
-.not-found__info {
-  max-width: 20rem;
+.newsapi-error__info {
   margin-top: 1rem;
   color: #B6BCBF;
   font: 18px/24px 'Roboto', Arial, sans-serif;
@@ -38,13 +27,13 @@
 }
 
 @media screen and (min-width: 768px) {
-  .not-found {
+  .newsapi-error {
     padding: 2.5rem 0;
   }
 }
 
 @media screen and (min-width: 1440px) {
-  .not-found {
+  .newsapi-error {
     padding: 5rem 0;
   }
 }

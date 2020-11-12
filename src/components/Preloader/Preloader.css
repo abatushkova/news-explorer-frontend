@@ -1,3 +1,7 @@
+.preloader {
+  padding: 2rem 0;
+}
+
 .preloader__circle {
   display: block;
   width: 74px;
@@ -29,5 +33,17 @@
   100% {
     -webkit-transform: rotate(360deg);
             transform: rotate(360deg);
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .preloader {
+    padding: 2.5rem 0;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .preloader {
+    padding: 5rem 0;
   }
 }

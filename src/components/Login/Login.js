@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
 import Button from '../Button/Button';
 import useInputChange from '../../hooks/useInputChange';
@@ -31,7 +31,7 @@ const Login = (props) => {
       email: values.email,
       password: values.password
     });
-  }
+  };
 
   return (
     <PopupWithForm

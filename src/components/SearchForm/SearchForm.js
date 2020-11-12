@@ -1,20 +1,39 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from '../Button/Button';
 import './SearchForm.css';
 
-const SearchForm = () => {
+const SearchForm = (props) => {
+  const { searchNews, resetSearch } = props;
   const [error, setError] = useState('');
+
+  const handleInputChange = () => {
+    setError('');
+  }
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
 
-    const form = evt.currentTarget;
-    const trimmedInput = form.elements.search.trim();
+    const form = evt.target;
+    const searchValue = form.elements.search.value;
 
-    if (!trimmedInput) {
+    if (!searchValue || !searchValue.trim()) {
       setError('Нужно ввести ключевое слово');
+
+      resetSearch();
+      return;
     }
+
+    searchNews(searchValue);
   };
+
+  useEffect(() => {
+    const searchInput = document.querySelector('.search__input');
+    const storageKeyword = localStorage.getItem('keyword') || null;
+
+    if (storageKeyword) {
+      searchInput.value = storageKeyword;
+    }
+  }, []);
 
   return (
     <section className="search">
@@ -29,9 +48,9 @@ const SearchForm = () => {
           <input
             type="text"
             name="search"
-            required={true}
             placeholder="Введите тему новости"
             className="search__input"
+            onChange={handleInputChange}
           />
           <Button
             type="submit"

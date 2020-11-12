@@ -3,7 +3,7 @@ import './Preloader.css';
 
 function Preloader() {
   return (
-    <div className="preloader">
+    <div className="preloader page__section">
       <span className="preloader__circle"></span>
       <h2 className="preloader__title">Идет поиск новостей...</h2>
     </div>
