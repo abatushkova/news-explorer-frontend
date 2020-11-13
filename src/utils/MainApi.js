@@ -1,12 +1,12 @@
 import {
-  LOCALHOST,
+  BASE_URL,
   BASE_IMAGE_URL,
 } from '../config.js';
 
 class Api {
 
   register({ password, email, name }) {
-    return fetch(`${LOCALHOST}/signup`, {
+    return fetch(`${BASE_URL}/signup`, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -20,7 +20,7 @@ class Api {
   }
 
   login({ email, password }) {
-    return fetch(`${LOCALHOST}/signin`, {
+    return fetch(`${BASE_URL}/signin`, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -40,7 +40,7 @@ class Api {
   }
 
   checkToken(token) {
-    return fetch(`${LOCALHOST}/users/me`, {
+    return fetch(`${BASE_URL}/users/me`, {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
@@ -54,7 +54,7 @@ class Api {
   }
 
   getUser(token) {
-    return fetch(`${LOCALHOST}/users/me`, {
+    return fetch(`${BASE_URL}/users/me`, {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
@@ -69,7 +69,7 @@ class Api {
   }
 
   getArticles(token) {
-    return fetch(`${LOCALHOST}/articles`, {
+    return fetch(`${BASE_URL}/articles`, {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
@@ -94,7 +94,7 @@ class Api {
       keyword
     } = article;
 
-    return fetch(`${LOCALHOST}/articles`, {
+    return fetch(`${BASE_URL}/articles`, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -119,7 +119,7 @@ class Api {
   }
 
   deleteArticle(articleID, token) {
-    return fetch(`${LOCALHOST}/articles/${articleID}`, {
+    return fetch(`${BASE_URL}/articles/${articleID}`, {
       method: 'DELETE',
       headers: {
         'Accept': 'application/json',

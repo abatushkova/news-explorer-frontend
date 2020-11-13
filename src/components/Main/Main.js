@@ -19,12 +19,12 @@ const Main = (props) => {
 
   const searchNews = (searchValue) => {
     localStorage.removeItem('keyword');
-    localStorage.removeItem('newsList');
+    localStorage.removeItem('freshNewsList');
     setKeyword(searchValue);
   };
 
   useEffect(() => {
-    if (!localStorage.getItem('newsList')) return;
+    if (!localStorage.getItem('freshNewsList')) return;
 
     setKeyword(localStorage.getItem('keyword'));
   }, []);

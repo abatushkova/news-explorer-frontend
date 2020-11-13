@@ -1,6 +1,6 @@
 import {
   PAGE_SIZE,
-  NEWSAPI_URL,
+  PRAKTIKUM_API_URL,
   API_KEY,
   MONTHS,
 } from '../config.js';
@@ -36,7 +36,7 @@ class Api {
     const dateFrom = weekAgo.toISOString();
     const dateTo = today.toISOString();
 
-    return fetch(`${NEWSAPI_URL}everything?q=${keyword}&from=${dateFrom}&to=${dateTo}&language=ru&pageSize=${PAGE_SIZE}&apiKey=${API_KEY}`)
+    return fetch(`${PRAKTIKUM_API_URL}everything?q=${keyword}&from=${dateFrom}&to=${dateTo}&language=ru&pageSize=${PAGE_SIZE}&apiKey=${API_KEY}`)
       .then((res) => res.ok
         ? res.json()
         : Promise.reject(`Ошибка: ${res.status}`)

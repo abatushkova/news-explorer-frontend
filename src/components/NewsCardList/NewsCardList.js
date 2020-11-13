@@ -104,9 +104,9 @@ const NewsCardList = (props) => {
 
   useEffect(() => {
     if (
-      totalResults === 3
-      || lastIndex >= PAGE_SIZE
-      || lastIndex >= totalResults
+      (totalResults <= 3)
+      || (lastIndex >= PAGE_SIZE)
+      || (lastIndex >= totalResults)
     ) {
       setHideBtn(true);
       return;
