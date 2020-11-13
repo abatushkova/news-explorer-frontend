@@ -1,61 +1,155 @@
-import React from 'react';
-import { ReactComponent as TrashIcon } from '../../images/trash.svg';
-import { ReactComponent as BookmarkIcon } from '../../images/bookmark.svg';
+import React, { useEffect, useState, useCallback } from 'react';
 import './NewsCard.css';
 
-const NewsCard = (props) => {
+const NewsCard = ({ ...props }) => {
   const {
-    urlToImage,
-    publishedAt,
-    title,
-    description,
-    source,
-    keyword
-  } = props.data;
-  const { isSavedNews } = props;
+    isSavedNewsPage,
+    loggedIn,
+    onSaveClick,
+    onDeleteClick,
+    openRegisterPopup,
+    news,
+  } = props;
+
+  const [isArticleSaved, setIsArticleSaved] = useState(false);
+
+  const saveArticleToLocal = (article) => {
+    const localArticleList = localStorage.getItem('localArticleList');
+    const savedArticleList = localArticleList ? JSON.parse(localArticleList) : [];
+
+    savedArticleList.push(article);
+    localStorage.setItem('localArticleList', JSON.stringify(savedArticleList));
+  };
+
+  const removeArticleFromLocal = (article) => {
+    let entry;
+    const list = JSON.parse(localStorage.getItem('localArticleList'));
+    list.forEach((item, index) => {
+      if (item._id === article._id) {
+        entry = index;
+      }
+    })
+
+    list.splice(entry, 1);
+    localStorage.setItem('localArticleList', JSON.stringify(list));
+  };
+
+  const handleSaveClick = (evt) => {
+    evt.preventDefault();
+
+    if (!loggedIn) {
+      openRegisterPopup();
+      return;
+    };
+
+    const bookmark = evt.target;
+
+    onSaveClick(news)
+      .then((res) => {
+        setIsArticleSaved(true);
+        saveArticleToLocal(res);
+        bookmark.blur();
+      })
+      .catch((err) => console.error(err));
+  };
+
+  const handleDeleteClick = (evt) => {
+    evt.preventDefault();
+
+    const bookmark = evt.target;
+    const list = JSON.parse(localStorage.getItem('localArticleList'));
+
+    list.forEach((item) => {
+        if (news.link === item.link) {
+          onDeleteClick(item._id)
+            .then((article) => {
+              setIsArticleSaved(false);
+              bookmark.blur();
+              removeArticleFromLocal(article);
+            })
+            .catch((err) => console.error(err));
+        }
+    });
+  };
+
+  const renderSavedBookmark = useCallback(() => {
+    if (localStorage.getItem('localArticleList')) {
+      const list = JSON.parse(localStorage.getItem('localArticleList'));
+
+      list.forEach((item) => {
+        if (news.link !== item.link) return;
+
+        setIsArticleSaved(true);
+      });
+    }
+  }, [news.link]);
+
+  useEffect(() => {
+    renderSavedBookmark();
+  }, [renderSavedBookmark]);
 
   return (
-    <div className="news">
-      {isSavedNews ? (
+    <a
+      href={news.link}
+      className="news"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+    {!isSavedNewsPage ? (
+      <>
+        <div className="news__info">
+          {(isArticleSaved & loggedIn) ? (
+            <button
+              type="button"
+              className="news__label news__icon news__bookmark news__bookmark_saved"
+              onClick={handleDeleteClick}
+            ></button>
+          ) : (
+            <button
+              type="button"
+              className="news__label news__icon news__bookmark"
+              onClick={handleSaveClick}
+            ></button>
+          )}
+          {!loggedIn && (
+            <span className="news__label news__popup">Войдите, чтобы сохранять статьи</span>
+          )}
+        </div>
+        {news.image === null ? (
+          <span className="news__img"></span>
+        ) : (
+          <img
+            src={news.image}
+            alt={news.title}
+            className="news__img"
+          />
+        )}
+      </>
+    ) : (
+      <>
         <div className="news__info news__info_saved">
-          <span className="news__label news__keyword">{keyword}</span>
+          <span className="news__label news__keyword">{news.keyword}</span>
           <button
             type="button"
-            className="news__label news__label_active"
-          >
-            <TrashIcon className="news__icon news__delete" />
-          </button>
+            className="news__label news__icon news__delete"
+            onClick={handleDeleteClick}
+          ></button>
           <span className="news__label news__popup">Убрать из сохранённых</span>
         </div>
-      ) : (
-        <div className="news__info">
-          {/* <button
-            type="button"
-            className="news__label"
-          >
-            <BookmarkIcon className="news__icon news__bookmark-saved" />
-          </button> */}
-          <button
-            type="button"
-            className="news__label news__label_active"
-          >
-            <BookmarkIcon className="news__icon news__bookmark" />
-          </button>
-          <span className="news__label news__popup">Войдите, чтобы сохранять статьи</span>
-        </div>
-      )}
-      <img
-        src={urlToImage}
-        alt={title}
-        className="news__img"
-      />
+        <img
+          src={news.image}
+          alt={news.title}
+          className="news__img"
+        />
+      </>
+    )}
       <div className="news__text">
-        <span className="news__date">{publishedAt}</span>
-        <h3 className="news__title">{title}</h3>
-        <p className="news__description">{description}</p>
-        <p className="news__src">{source}</p>
+        <span className="news__date">{news.date}</span>
+        <h3 className="news__title">{news.title}</h3>
+        <p className="news__description">{news.text}</p>
+        <p className="news__src">{news.source}</p>
       </div>
-    </div>
+    </a>
   );
 }
 

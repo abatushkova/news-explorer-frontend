@@ -38,6 +38,7 @@
   background-color: #fff;
   color: #1A1B22;
   font: 16px/22px 'Roboto', Arial, sans-serif;
+  font-weight: 400;
 }
 
 .search__input::-webkit-input-placeholder {
@@ -102,6 +103,16 @@
   font-weight: 400;
 }
 
+.search__error {
+  display: block;
+  min-height: 16px;
+  padding-left: 1rem;
+  margin-bottom: .5rem;
+  color: #ff0000;
+  font: 14px/1 'Inter', Arial, sans-serif;
+  font-weight: 400;
+}
+
 @media screen and (min-width: 768px) {
   .search__section {
     max-width: 28rem;
@@ -112,7 +123,7 @@
 
   .search__form {
     position: relative;
-    margin-top: 3rem;
+    margin-top: 1.5rem;
   }
 
   .search__input {
@@ -121,10 +132,14 @@
 
   .search__submit-btn {
     position: absolute;
-    top: 0;
+    bottom: 0;
     right: 0;
     width: 10rem;
     margin-top: 0;
+  }
+
+  .search__error {
+    padding-left: 1.5rem;
   }
 }
 
@@ -136,7 +151,7 @@
   }
 
   .search__form {
-    margin-top: 4rem;
+    margin-top: 2.5rem;
   }
 
   .search__input {

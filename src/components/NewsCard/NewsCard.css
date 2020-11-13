@@ -17,18 +17,18 @@
   overflow: hidden;
 }
 
-/* for future Link instead of div */
-/* .news:focus,
+.news:focus,
 .news:hover {
   box-shadow: 0 2px 20px rgba(8, 29, 45, 0.1);
   cursor: pointer;
-} */
+}
 
 .news__info {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
+  z-index: 1;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -59,40 +59,45 @@
 .news__icon {
   width: 40px;
   height: 40px;
-  padding: .5rem;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  background-position: center;
+  background-size: 24px 24px;
+  background-repeat: no-repeat;
+  background-color: #fff;
   cursor: pointer;
 }
 
-.news__label_active:focus .news__delete path,
-.news__label_active:hover .news__delete path {
-  fill: #1A1B22;
-  -webkit-transition: fill .15s linear 0s;
-  -o-transition: fill .15s linear 0s;
-  transition: fill .15s linear 0s;
+.news__delete {
+  background-image: url(../../images/trash.svg);
 }
 
-.news__label_active:focus .news__bookmark path,
-.news__label_active:hover .news__bookmark path {
-  stroke: #1A1B22;
-  -webkit-transition: stroke .15s linear 0s;
-  -o-transition: stroke .15s linear 0s;
-  transition: stroke .15s linear 0s;
+.news__delete:focus,
+.news__delete:hover {
+  background-image: url(../../images/trash_hover.svg);
 }
 
-.news__bookmark-saved path {
-  fill: #2F71E5;
-  stroke: #2F71E5;
+.news__bookmark {
+  background-image: url(../../images/bookmark.svg);
+}
+
+.news__bookmark:focus,
+.news__bookmark:hover {
+  background-image: url(../../images/bookmark_hover.svg);
+}
+
+.news__bookmark_saved,
+.news__bookmark_saved:focus,
+.news__bookmark_saved:hover {
+  background-image: url(../../images/bookmark_saved.svg);
 }
 
 .news__img {
   width: 100%;
   height: 100%;
+  background-color: #B6BCBF;
   -o-object-fit: cover;
     object-fit: cover;
-  -o-object-position: top center;
-    object-position: top center;
+  -o-object-position: top left;
+    object-position: top left;
 }
 
 .news__text {
@@ -151,8 +156,7 @@
   transition: opacity .15s linear 0s;
 }
 
-.news__label_active:focus + .news__popup,
-.news__label_active:hover + .news__popup {
+.news__icon:hover + .news__popup {
   opacity: 1;
   visibility: visible;
 }

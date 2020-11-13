@@ -44,6 +44,6 @@ const Footer = () => {
       <p className="footer__copyright">&copy; 2020 Supersite, Powered by News API</p>
     </footer>
   );
-}
+};
 
 export default Footer;

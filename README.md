@@ -4,7 +4,8 @@ A service to find news and save it to your personal account, built with React Cr
 A graduation project for yandex.praktikum.
 
 ## Description
-This app is currently in development.
+This app is based on NewsApi service, which search for articles from news sources and blogs all over the russian media. User just type a headline word in and watch the magic.  
+Another functionality is to register an account and save favourite articles under user's name.
 
 ## Installation
 You will need node and npm installed globally on your machine.
@@ -30,3 +31,8 @@ Your app is ready to be deployed!
 
 ## Credits
 Alena Batushkova - junior web developer
+
+## Links
+IP 84.201.130.3  
+Domain name - api.the-news.students.nomoreparties.co  
+[React app](https://the-news.students.nomoreparties.co/)

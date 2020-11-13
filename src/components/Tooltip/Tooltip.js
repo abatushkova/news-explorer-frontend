@@ -7,11 +7,6 @@ const Tooltip = (props) => {
     onLoginClick
   } = props;
 
-  const handleClick = () => {
-    onClose();
-    onLoginClick();
-  };
-
   return (
     <PopupWithForm
       title="Пользователь успешно зарегистрирован!"
@@ -20,7 +15,7 @@ const Tooltip = (props) => {
       <button
         type="button" 
         className="popup__link popup__link_size_18"
-        onClick={handleClick}
+        onClick={onLoginClick}
       >
         Войти
       </button>

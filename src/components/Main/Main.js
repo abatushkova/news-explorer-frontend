@@ -1,25 +1,51 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import SearchForm from '../SearchForm/SearchForm';
 import Author from '../Author/Author';
 import NewsCardList from '../NewsCardList/NewsCardList';
-import Header from '../Header/Header';
 import './Main.css';
 
 const Main = (props) => {
-  const { mode, onLoginClick } = props;
+  const {
+    loggedIn,
+    onSaveClick,
+    onDeleteClick,
+    onSaveClickNotLoggedIn,
+  } = props;
+  const [keyword, setKeyword] = useState('');
+
+  const resetSearch = () => {
+    setKeyword('');
+  };
+
+  const searchNews = (searchValue) => {
+    localStorage.removeItem('keyword');
+    localStorage.removeItem('freshNewsList');
+    setKeyword(searchValue);
+  };
+
+  useEffect(() => {
+    if (!localStorage.getItem('freshNewsList')) return;
+
+    setKeyword(localStorage.getItem('keyword'));
+  }, []);
 
   return (
-    <>
-      <Header
-        mode={mode.WHITE}
-        onLoginClick={onLoginClick}
+    <main>
+      <SearchForm
+        searchNews={searchNews}
+        resetSearch={resetSearch}
       />
-      <main>
-        <SearchForm />
-        <NewsCardList />
-        <Author />
-      </main>
-    </>
+      {keyword && (
+        <NewsCardList
+          keyword={keyword}
+          loggedIn={loggedIn}
+          onSaveClick={onSaveClick}
+          onDeleteClick={onDeleteClick}
+          onSaveClickNotLoggedIn={onSaveClickNotLoggedIn}
+        />
+      )}
+      <Author />
+    </main>
   );
 };
 

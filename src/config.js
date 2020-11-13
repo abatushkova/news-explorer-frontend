@@ -1,0 +1,10 @@
+export const LOCALHOST = 'http://localhost:8080'
+export const BASE_URL = 'https://api.the-news.students.nomoreparties.co';
+export const NEWSAPI_URL = 'https://newsapi.org/v2/';
+export const PRAKTIKUM_API_URL = 'https://nomoreparties.co/news/v2/';
+export const TOKEN = localStorage.getItem('token');
+export const API_KEY = '3cd4ee963700413b82121edfd3d7eb80';
+export const PAGE_SIZE = 100;
+export const PAGE_COUNTER = 3;
+export const BASE_IMAGE_URL = 'https://yastatic.net/q/praktikum/v0.50.1-1549988787/static/favicon.png';
+export const MONTHS = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];

@@ -1,34 +1,39 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import Button from '../Button/Button';
 import { ReactComponent as LogoutIcon } from '../../images/logout.svg';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import './NavBar.css';
 
 const NavBar = (props) => {
+  const currentUser = useContext(CurrentUserContext);
+  const [burgerClass, setBurgerClass] = useState('');
+
   const {
     mode,
     openLogin,
+    loggedIn,
+    signOut,
   } = props;
-
-  const [burgerClass, setBurgerClass] = useState('');
 
   const menuClass = `menu menu_theme_${mode}`;
   const listClass = `menu__list menu__list_bg_${mode}`;
   const linkClass = `menu__link menu__link_color_${mode}`;
   const iconClass = `menu__logout-icon menu__logout-icon_color_${mode}`;
-  
+  const btnClass = `menu__btn menu__btn_border_${mode}`;
+
   const toggleBurger = () => {
     if (burgerClass === '') {
       setBurgerClass('burger_active');
     } else {
       setBurgerClass('');
     }
-  }
-  
+  };
+
   const handleLoginClick = () => {
     openLogin();
     setBurgerClass('');
-  }
+  };
 
   return (
     <>
@@ -48,36 +53,38 @@ const NavBar = (props) => {
               Главная
             </NavLink>
           </li>
-          {mode === 'black' && (
+          {loggedIn ? (
+            <>
+              <li className="menu__item">
+                <NavLink
+                  exact to="/saved-news"
+                  className={linkClass}
+                  activeClassName="menu__link_active"
+                >
+                  Сохранённые статьи
+                </NavLink>
+              </li>
+              <li className="menu__item">
+                <Button
+                  type="button"
+                  btnClass={btnClass}
+                  clickHandler={signOut}
+                >
+                  {currentUser.name}
+                  <LogoutIcon className={iconClass} />
+                </Button>
+              </li>
+            </>
+          ) : (
             <li className="menu__item">
-              <NavLink
-                exact to="/saved-news"
-                className={linkClass}
-                activeClassName="menu__link_active"
-              >
-                Сохранённые статьи
-              </NavLink>
-            </li>
-          )}
-          <li className="menu__item">
-            {mode === 'white' ? (
               <Button
                 type="button"
-                btnClass="menu__btn"
+                btnClass={btnClass}
                 name="Авторизоваться"
                 clickHandler={handleLoginClick}
               />
-            ) : (
-              <Button
-                type="button"
-                btnClass="menu__btn"
-                // clickHandler={signOut}
-              >
-                Грета
-                <LogoutIcon className={iconClass} />
-              </Button>
-            )}
-          </li>
+            </li>
+          )}
         </ul>
       </nav>
     </>

@@ -6,10 +6,13 @@ import useInputChange from '../../hooks/useInputChange';
 const Login = (props) => {
   const {
     onClose,
-    onRegisterClick
+    onRegisterClick,
+    apiError,
+    onLogin
   } = props;
 
   const {
+    values,
     errors,
     handleInputChange,
     isFormValid,
@@ -21,19 +24,21 @@ const Login = (props) => {
     onClose();
   };
 
-  // const handleSubmit = (evt) => {
-  //   evt.preventDefault();
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
 
-  //   onLogin();
-  // }
+    onLogin({
+      email: values.email,
+      password: values.password
+    });
+  };
 
   return (
     <PopupWithForm
       title="Вход"
       linkName="Зарегистрироваться"
-      submitName="Войти"
       closePopup={handleClose}
-      // onSubmit={handleSubmit}
+      onSubmit={handleSubmit}
       changePopup={onRegisterClick}
     >
       <label className="popup__label">
@@ -60,7 +65,7 @@ const Login = (props) => {
         />
         <span className="popup__error">{errors.password}</span>
       </label>
-      <span className="popup__error popup__error_type_api">{}</span>
+      <span className="popup__error popup__error_type_api">{apiError}</span>
       <Button
         type="submit"
         btnClass="popup__submit-btn"
