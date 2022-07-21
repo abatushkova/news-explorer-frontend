@@ -28,11 +28,3 @@ $ npm run build
 It correctly bundles React in production mode and optimizes the build for the best performance.  
 The build is minified and the filenames include the hashes.  
 Your app is ready to be deployed!
-
-## Credits
-Alena Batushkova - junior web developer
-
-## Links
-IP 84.201.130.3  
-Domain name - api.the-news.students.nomoreparties.co  
-[React app](https://the-news.students.nomoreparties.co/)
